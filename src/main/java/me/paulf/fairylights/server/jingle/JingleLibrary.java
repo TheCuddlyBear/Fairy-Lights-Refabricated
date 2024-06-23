@@ -11,8 +11,8 @@ import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectLists;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 
 public class JingleLibrary {
     public static final String CHRISTMAS = "christmas";
