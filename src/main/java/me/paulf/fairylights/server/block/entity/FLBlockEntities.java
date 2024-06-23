@@ -1,16 +1,16 @@
 package me.paulf.fairylights.server.block.entity;
 
+import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import me.paulf.fairylights.FairyLights;
 import me.paulf.fairylights.server.block.FLBlocks;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 public final class FLBlockEntities {
     private FLBlockEntities() {}
 
-    public static final DeferredRegister<BlockEntityType<?>> REG = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, FairyLights.ID);
+    public static final LazyRegistrar<BlockEntityType<?>> REG = LazyRegistrar.create(Registries.BLOCK_ENTITY_TYPE, FairyLights.ID);
 
     public static final RegistryObject<BlockEntityType<FastenerBlockEntity>> FASTENER = REG.register("fastener", () -> BlockEntityType.Builder.of(FastenerBlockEntity::new, FLBlocks.FASTENER.get()).build(null));
 

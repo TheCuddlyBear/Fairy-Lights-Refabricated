@@ -1,16 +1,17 @@
 package me.paulf.fairylights.server.block;
 
+import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import me.paulf.fairylights.FairyLights;
 import me.paulf.fairylights.server.item.LightVariant;
 import me.paulf.fairylights.server.item.SimpleLightVariant;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+
 
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
@@ -18,7 +19,7 @@ import java.util.function.Supplier;
 public final class FLBlocks {
     private FLBlocks() {}
 
-    public static final DeferredRegister<Block> REG = DeferredRegister.create(ForgeRegistries.BLOCKS, FairyLights.ID);
+    public static final LazyRegistrar<Block> REG = LazyRegistrar.create(Registries.BLOCK, FairyLights.ID);
 
 
     public static final RegistryObject<FastenerBlock> FASTENER = REG.register("fastener", () -> new FastenerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).forceSolidOn().strength(3.5F).sound(SoundType.LANTERN)));
