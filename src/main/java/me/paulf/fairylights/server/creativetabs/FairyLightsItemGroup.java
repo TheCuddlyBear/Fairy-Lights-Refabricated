@@ -1,5 +1,7 @@
 package me.paulf.fairylights.server.creativetabs;
 
+import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import me.paulf.fairylights.FairyLights;
 import me.paulf.fairylights.server.block.FLBlocks;
 import me.paulf.fairylights.server.block.LightBlock;
@@ -13,8 +15,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public final class FairyLightsItemGroup
         super();
     }
 
-    public static final DeferredRegister<CreativeModeTab> TAB_REG = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, FairyLights.ID);
+    public static final LazyRegistrar<CreativeModeTab> TAB_REG = LazyRegistrar.create(Registries.CREATIVE_MODE_TAB, FairyLights.ID);
 
     public static final RegistryObject<CreativeModeTab> GENERAL = TAB_REG.register("general", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 1)
                                                                                                       .icon(() -> new ItemStack(FLItems.HANGING_LIGHTS.get()))
