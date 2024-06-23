@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "fairylights",
+  "version": "${version}",
+  "name": "Fairy Lights",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/beheerder/flights"
+  },
+  "license": "MIT",
+  "icon": "assets/fairylights/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "me.paulf.fairylights.client.FairyLightsClient"
+    ],
+    "main": [
+      "me.paulf.fairylights.FairyLights"
+    ]
+  },
+  "mixins": [
+    "fairylights.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
