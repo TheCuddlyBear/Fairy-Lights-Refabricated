@@ -1,6 +1,7 @@
 package me.paulf.fairylights.server.item.crafting;
 
 import com.google.common.collect.ImmutableList;
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
 import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import me.paulf.fairylights.FairyLights;
@@ -34,7 +35,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -48,7 +48,7 @@ import java.util.function.UnaryOperator;
 public final class FLCraftingRecipes {
     private FLCraftingRecipes() {}
 
-    public static final LazyRegistrar<RecipeSerializer<?>> REG = LazyRegistrar.create(ForgeRegistries.RECIPE_SERIALIZERS, FairyLights.ID);
+    public static final LazyRegistrar<RecipeSerializer<?>> REG = LazyRegistrar.create(Registries.RECIPE_SERIALIZER, FairyLights.ID);
 
     public static final RegistryObject<RecipeSerializer<GenericRecipe>> HANGING_LIGHTS = REG.register("crafting_special_hanging_lights", () -> new SimpleCraftingRecipeSerializer<>(FLCraftingRecipes::createHangingLights));
 
@@ -110,15 +110,15 @@ public final class FLCraftingRecipes {
 
     public static final RegistryObject<? extends RecipeSerializer<CustomRecipe>> COPY_COLOR = REG.register("crafting_special_copy_color", () -> new SimpleCraftingRecipeSerializer<>(CopyColorRecipe::new));
 
-    public static final TagKey<Item> LIGHTS = ItemTags.create(new ResourceLocation(FairyLights.ID + ":lights"));
+    public static final TagKey<Item> LIGHTS = TagKey.create(Registries.ITEM, new ResourceLocation(FairyLights.ID + ":lights"))
 
-    public static final TagKey<Item> TWINKLING_LIGHTS = ItemTags.create(new ResourceLocation(FairyLights.ID + ":twinkling_lights"));
+    public static final TagKey<Item> TWINKLING_LIGHTS = TagKey.create(Registries.ITEM, new ResourceLocation(FairyLights.ID + ":twinkling_lights"));
 
-    public static final TagKey<Item> PENNANTS = ItemTags.create(new ResourceLocation(FairyLights.ID + ":pennants"));
+    public static final TagKey<Item> PENNANTS = TagKey.create(Registries.ITEM, new ResourceLocation(FairyLights.ID + ":pennants"));
 
-    public static final TagKey<Item> DYEABLE = ItemTags.create(new ResourceLocation(FairyLights.ID + ":dyeable"));
+    public static final TagKey<Item> DYEABLE = TagKey.create(Registries.ITEM, new ResourceLocation(FairyLights.ID + ":dyeable"));
 
-    public static final TagKey<Item> DYEABLE_LIGHTS = ItemTags.create(new ResourceLocation(FairyLights.ID + ":dyeable_lights"));
+    public static final TagKey<Item> DYEABLE_LIGHTS = TagKey.create(Registries.ITEM, new ResourceLocation(FairyLights.ID + ":dyeable_lights"));
 
     public static final RegularIngredient DYE_SUBTYPE_INGREDIENT = new BasicRegularIngredient(LazyTagIngredient.of(Tags.Items.DYES)) {
         @Override
