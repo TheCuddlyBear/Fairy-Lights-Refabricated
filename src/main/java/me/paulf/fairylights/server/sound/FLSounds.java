@@ -1,16 +1,17 @@
 package me.paulf.fairylights.server.sound;
 
+import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import me.paulf.fairylights.FairyLights;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+
 
 public final class FLSounds {
     private FLSounds() {}
 
-    public static final DeferredRegister<SoundEvent> REG = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, FairyLights.ID);
+    public static final LazyRegistrar<SoundEvent> REG = LazyRegistrar.create(Registries.SOUND_EVENT, FairyLights.ID);
 
     public static final RegistryObject<SoundEvent> CORD_STRETCH = create("cord.stretch");
 
