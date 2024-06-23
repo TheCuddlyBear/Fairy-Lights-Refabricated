@@ -2,6 +2,7 @@ package me.paulf.fairylights.data;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonObject;
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import me.paulf.fairylights.FairyLights;
 import me.paulf.fairylights.server.block.FLBlocks;
 import me.paulf.fairylights.server.item.FLItems;
@@ -26,7 +27,6 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;

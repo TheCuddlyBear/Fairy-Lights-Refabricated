@@ -1,5 +1,6 @@
 package me.paulf.fairylights.client;
 
+
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public final class FLClientConfig {
