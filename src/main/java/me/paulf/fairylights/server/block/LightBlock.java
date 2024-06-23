@@ -3,6 +3,8 @@ package me.paulf.fairylights.server.block;
 import me.paulf.fairylights.server.block.entity.LightBlockEntity;
 import me.paulf.fairylights.server.item.DyeableItem;
 import me.paulf.fairylights.server.item.LightVariant;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -37,10 +39,9 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
@@ -169,7 +170,7 @@ public class LightBlock extends FaceAttachedHorizontalDirectionalBlock implement
         return super.use(state, world, pos, player, hand, hit);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     @Override
     public void animateTick(final BlockState state, final Level world, final BlockPos pos, final RandomSource rng) {
         super.animateTick(state, world, pos, rng);
@@ -203,8 +204,8 @@ public class LightBlock extends FaceAttachedHorizontalDirectionalBlock implement
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player) {
-        final BlockEntity entity = world.getBlockEntity(pos);
+    public @NotNull ItemStack getCloneItemStack(BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
+        final BlockEntity entity = blockGetter.getBlockEntity(blockPos);
         if (entity instanceof LightBlockEntity) {
             return ((LightBlockEntity) entity).getLight().getItem().copy();
         }
