@@ -1,12 +1,12 @@
 package me.paulf.fairylights.server.item;
 
+import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import me.paulf.fairylights.FairyLights;
 import me.paulf.fairylights.server.block.FLBlocks;
 import me.paulf.fairylights.server.block.LightBlock;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 public final class FLItems {
     private FLItems() {}
 
-    public static final DeferredRegister<Item> REG = DeferredRegister.create(ForgeRegistries.ITEMS, FairyLights.ID);
+    public static final LazyRegistrar<Item> REG = LazyRegistrar.create(Registries.ITEM, FairyLights.ID);
 
     public static final RegistryObject<ConnectionItem> HANGING_LIGHTS = REG.register("hanging_lights", () -> new HangingLightsConnectionItem(defaultProperties()));
 

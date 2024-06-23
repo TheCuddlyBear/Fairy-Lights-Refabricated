@@ -2,6 +2,7 @@ package me.paulf.fairylights;
 
 import me.paulf.fairylights.server.block.FLBlocks;
 import me.paulf.fairylights.server.block.entity.FLBlockEntities;
+import me.paulf.fairylights.server.item.FLItems;
 import net.fabricmc.api.ModInitializer;
 
 public class FairyLights implements ModInitializer {
@@ -13,5 +14,6 @@ public class FairyLights implements ModInitializer {
         // Register registries
         FLBlocks.REG.register();
         FLBlockEntities.REG.register();
+        FLItems.REG.register();
     }
 }
