@@ -1,13 +1,13 @@
 package me.paulf.fairylights.server.string;
 
+import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import me.paulf.fairylights.FairyLights;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
 
 public final class StringTypes {
     private StringTypes() {}
 
-    public static final DeferredRegister<StringType> REG = DeferredRegister.create(FairyLights.STRING_TYPE, FairyLights.ID);
+    public static final LazyRegistrar<StringType> REG = LazyRegistrar.create(FairyLights.STRING_TYPE, FairyLights.ID);
 
     public static final RegistryObject<StringType> BLACK_STRING = REG.register("black_string", () -> new StringType(0x323232));
 

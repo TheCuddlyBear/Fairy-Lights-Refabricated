@@ -35,8 +35,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +42,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-@EventBusSubscriber(modid = FairyLights.ID)
 public final class FLCraftingRecipes {
     private FLCraftingRecipes() {}
 
@@ -110,7 +107,7 @@ public final class FLCraftingRecipes {
 
     public static final RegistryObject<? extends RecipeSerializer<CustomRecipe>> COPY_COLOR = REG.register("crafting_special_copy_color", () -> new SimpleCraftingRecipeSerializer<>(CopyColorRecipe::new));
 
-    public static final TagKey<Item> LIGHTS = TagKey.create(Registries.ITEM, new ResourceLocation(FairyLights.ID + ":lights"))
+    public static final TagKey<Item> LIGHTS = TagKey.create(Registries.ITEM, new ResourceLocation(FairyLights.ID + ":lights"));
 
     public static final TagKey<Item> TWINKLING_LIGHTS = TagKey.create(Registries.ITEM, new ResourceLocation(FairyLights.ID + ":twinkling_lights"));
 
