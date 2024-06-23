@@ -2,6 +2,7 @@ package me.paulf.fairylights;
 
 import me.paulf.fairylights.server.block.FLBlocks;
 import me.paulf.fairylights.server.block.entity.FLBlockEntities;
+import me.paulf.fairylights.server.entity.FLEntities;
 import me.paulf.fairylights.server.item.FLItems;
 import me.paulf.fairylights.server.item.crafting.FLCraftingRecipes;
 import me.paulf.fairylights.server.sound.FLSounds;
@@ -19,6 +20,8 @@ public class FairyLights implements ModInitializer {
         // Register registries
         FLBlocks.REG.register();
         FLSounds.REG.register();
+        FLEntities.REG.register();
+
         FLBlockEntities.REG.register();
         FLItems.REG.register();
         FLCraftingRecipes.REG.register();

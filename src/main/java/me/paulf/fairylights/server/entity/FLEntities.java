@@ -1,16 +1,16 @@
 package me.paulf.fairylights.server.entity;
 
+import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import me.paulf.fairylights.FairyLights;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 public final class FLEntities {
     private FLEntities() {}
-
-    public static final DeferredRegister<EntityType<?>> REG = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, FairyLights.ID);
+    // TODO: Not working yet, fix the entity registring.
+    public static final LazyRegistrar<EntityType<?>> REG = LazyRegistrar.create(Registries.ENTITY_TYPE, FairyLights.ID);
 
     public static final RegistryObject<EntityType<FenceFastenerEntity>> FASTENER = REG.register("fastener", () ->
         EntityType.Builder.<FenceFastenerEntity>of(FenceFastenerEntity::new, MobCategory.MISC)
