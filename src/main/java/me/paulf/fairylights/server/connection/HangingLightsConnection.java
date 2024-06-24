@@ -29,9 +29,8 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -91,7 +90,7 @@ public final class HangingLightsConnection extends HangingFeatureConnection<Ligh
             if (!ItemStack.matches(light, heldStack)) {
                 final ItemStack placed = heldStack.split(1);
                 this.pattern.set(index, placed);
-                ItemHandlerHelper.giveItemToPlayer(player, light);
+                player.getInventory().add(light); // instead of item handler
                 this.computeCatenary();
                 this.world.playSound(null, hit.x, hit.y, hit.z, FLSounds.FEATURE_COLOR_CHANGE.get(), SoundSource.BLOCKS, 1, 1);
                 return true;

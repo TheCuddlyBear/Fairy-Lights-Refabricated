@@ -1,14 +1,14 @@
 package me.paulf.fairylights.server.connection;
 
+import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import me.paulf.fairylights.FairyLights;
 import me.paulf.fairylights.server.item.FLItems;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
 
 public final class ConnectionTypes {
     private ConnectionTypes() {}
 
-    public static final DeferredRegister<ConnectionType<?>> REG = DeferredRegister.create(FairyLights.CONNECTION_TYPE, FairyLights.ID);
+    public static final LazyRegistrar<ConnectionType<?>> REG = LazyRegistrar.create(FairyLights.CONNECTION_TYPE, FairyLights.ID);
 
     public static final RegistryObject<ConnectionType<HangingLightsConnection>> HANGING_LIGHTS = REG.register("hanging_lights",
         () -> ConnectionType.Builder.create(HangingLightsConnection::new).item(FLItems.HANGING_LIGHTS).build()
