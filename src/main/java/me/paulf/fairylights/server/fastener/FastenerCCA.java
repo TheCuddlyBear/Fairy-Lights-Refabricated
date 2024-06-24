@@ -10,27 +10,23 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-
-public interface Fastener<F extends FastenerAccessor> extends ICapabilitySerializable<CompoundTag> {
+public interface FastenerCCA<F extends FastenerAccessor> extends Component {
     @Override
-    CompoundTag serializeNBT();
-
+    void writeToNbt(CompoundTag tag);
+    
     Optional<Connection> get(final UUID id);
 
     List<Connection> getOwnConnections();
 
     List<Connection> getAllConnections();
 
-    default Optional<Connection> getFirstConnection() {
-        return this.getAllConnections().stream().findFirst();
-    }
+    default Optional<Connection> getFirstConnection() {return this.getAllConnections().stream().findFirst(); }
 
     AABB getBounds();
 
@@ -61,10 +57,7 @@ public interface Fastener<F extends FastenerAccessor> extends ICapabilitySeriali
 
     boolean hasNoConnections();
 
-    boolean hasConnectionWith(Fastener<?> fastener);
-
-    @Nullable
-    Connection getConnectionTo(FastenerAccessor destination);
+    boolean hasConnectionWith(FastenerCCA<?> fastener);
 
     boolean removeConnection(UUID uuid);
 
