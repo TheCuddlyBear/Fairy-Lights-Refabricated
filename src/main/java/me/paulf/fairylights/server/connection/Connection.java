@@ -1,5 +1,6 @@
 package me.paulf.fairylights.server.connection;
 
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import me.paulf.fairylights.FairyLights;
 import me.paulf.fairylights.server.collision.Collidable;
 import me.paulf.fairylights.server.collision.CollidableList;
@@ -34,10 +35,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 
 public abstract class Connection implements NBTSerializable {
@@ -240,7 +239,7 @@ public abstract class Connection implements NBTSerializable {
             this.fastener.removeConnection(this);
             dest.removeConnection(this.uuid);
             if (this.shouldDrop()) {
-                ItemHandlerHelper.giveItemToPlayer(player, this.getItemStack());
+                player.getInventory().add(this.getItemStack()); // Changed to not use forge item handler
             }
             final CompoundTag data = heldStack.getTag();
             final ConnectionType<? extends Connection> type = ((ConnectionItem) heldStack.getItem()).getConnectionType();
