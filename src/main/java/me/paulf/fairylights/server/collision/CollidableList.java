@@ -2,8 +2,8 @@ package me.paulf.fairylights.server.collision;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 
 public final class CollidableList implements Collidable {
     private final ImmutableList<Collidable> collision;
