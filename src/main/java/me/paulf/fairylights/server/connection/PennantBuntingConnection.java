@@ -9,6 +9,8 @@ import me.paulf.fairylights.server.item.DyeableItem;
 import me.paulf.fairylights.server.sound.FLSounds;
 import me.paulf.fairylights.util.OreDictUtils;
 import me.paulf.fairylights.util.styledstring.StyledString;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -19,9 +21,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +57,7 @@ public final class PennantBuntingConnection extends HangingFeatureConnection<Pen
             if (!ItemStack.matches(pennant, heldStack)) {
                 final ItemStack placed = heldStack.split(1);
                 this.pattern.set(index, placed);
-                ItemHandlerHelper.giveItemToPlayer(player, pennant);
+                player.getInventory().add(pennant); // replaces item handler
                 this.computeCatenary();
                 heldStack.shrink(1);
                 this.world.playSound(null, hit.x, hit.y, hit.z, FLSounds.FEATURE_COLOR_CHANGE.get(), SoundSource.BLOCKS, 1, 1);
@@ -109,7 +108,7 @@ public final class PennantBuntingConnection extends HangingFeatureConnection<Pen
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public Screen createTextGUI() {
         return new EditLetteredConnectionScreen<>(this);
     }
