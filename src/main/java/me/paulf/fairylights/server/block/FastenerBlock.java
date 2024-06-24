@@ -4,6 +4,7 @@ import me.paulf.fairylights.server.ServerEventHandler;
 import me.paulf.fairylights.server.block.entity.FLBlockEntities;
 import me.paulf.fairylights.server.block.entity.FastenerBlockEntity;
 import me.paulf.fairylights.server.capability.CapabilityHandler;
+import me.paulf.fairylights.server.capability.ComponentHandler;
 import me.paulf.fairylights.server.connection.HangingLightsConnection;
 import me.paulf.fairylights.server.fastener.accessor.BlockFastenerAccessor;
 import me.paulf.fairylights.server.jingle.JingleLibrary;
@@ -34,6 +35,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -123,7 +125,8 @@ public final class FastenerBlock extends DirectionalBlock implements EntityBlock
         if (!state.is(newState.getBlock())) {
             final BlockEntity entity = world.getBlockEntity(pos);
             if (entity instanceof FastenerBlockEntity) {
-                entity.getCapability(CapabilityHandler.FASTENER_CAP).ifPresent(f -> f.dropItems(world, pos));
+                ComponentHandler.FASTENER_CAP.get(entity).dropItems(world, pos);
+                //entity.getCapability(CapabilityHandler.FASTENER_CAP).ifPresent(f -> f.dropItems(world, pos));
             }
             super.onRemove(state, world, pos, newState, isMoving);
         }

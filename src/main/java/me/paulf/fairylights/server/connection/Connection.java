@@ -7,6 +7,7 @@ import me.paulf.fairylights.server.collision.CollidableList;
 import me.paulf.fairylights.server.collision.FeatureCollisionTree;
 import me.paulf.fairylights.server.collision.Intersection;
 import me.paulf.fairylights.server.fastener.Fastener;
+import me.paulf.fairylights.server.fastener.FastenerCCA;
 import me.paulf.fairylights.server.fastener.FastenerType;
 import me.paulf.fairylights.server.fastener.FenceFastener;
 import me.paulf.fairylights.server.fastener.accessor.FastenerAccessor;
@@ -52,7 +53,7 @@ public abstract class Connection implements NBTSerializable {
 
     private final ConnectionType<?> type;
 
-    protected final Fastener<?> fastener;
+    protected final FastenerCCA<?> fastener;
 
     private final UUID uuid;
 
@@ -81,7 +82,7 @@ public abstract class Connection implements NBTSerializable {
 
     private boolean drop;
 
-    public Connection(final ConnectionType<?> type, final Level world, final Fastener<?> fastener, final UUID uuid) {
+    public Connection(final ConnectionType<?> type, final Level world, final FastenerCCA<?> fastener, final UUID uuid) {
         this.type = type;
         this.world = world;
         this.fastener = fastener;
@@ -115,7 +116,7 @@ public abstract class Connection implements NBTSerializable {
         return this.collision;
     }
 
-    public final Fastener<?> getFastener() {
+    public final FastenerCCA<?> getFastener() {
         return this.fastener;
     }
 
@@ -123,7 +124,7 @@ public abstract class Connection implements NBTSerializable {
         return this.uuid;
     }
 
-    public final void setDestination(final Fastener<?> destination) {
+    public final void setDestination(final FastenerCCA<?> destination) {
         this.prevDestination = this.destination;
         this.destination = destination.createAccessor();
         this.computeCatenary();
@@ -163,7 +164,7 @@ public abstract class Connection implements NBTSerializable {
     }
 
     public final boolean isDynamic() {
-        return this.fastener.isMoving() || this.destination.get(this.world, false).filter(Fastener::isMoving).isPresent();
+        return this.fastener.isMoving() || this.destination.get(this.world, false).filter(FastenerCCA::isMoving).isPresent();
     }
 
     public final boolean isModifiable(final Player player) {
@@ -190,7 +191,7 @@ public abstract class Connection implements NBTSerializable {
     }
 
     public void disconnect(final Player player, final Vec3 hit) {
-        this.destination.get(this.world).ifPresent(f -> this.disconnect(f, hit));
+        this.destination.get(this.world).ifPresent(f -> this.disconnect((Player) f, hit));
     }
 
     private void disconnect(final Fastener<?> destinationFastener, final Vec3 hit) {
@@ -302,7 +303,7 @@ public abstract class Connection implements NBTSerializable {
         return changed;
     }
 
-    private boolean updateCatenary(final Vec3 from, final Fastener<?> dest, final Vec3 point) {
+    private boolean updateCatenary(final Vec3 from, final FastenerCCA<?> dest, final Vec3 point) {
         if (this.updateCatenary || this.isDynamic()) {
             final Vec3 vec = point.subtract(from);
             if (vec.length() > 1e-6) {
@@ -378,7 +379,7 @@ public abstract class Connection implements NBTSerializable {
         collision.add(FeatureCollisionTree.build(CORD_FEATURE, i -> Segment.INSTANCE, i -> bounds[i], 1, bounds.length - 2));
     }
 
-    public void deserialize(final Fastener<?> destination, final CompoundTag compound, final boolean drop) {
+    public void deserialize(final FastenerCCA<?> destination, final CompoundTag compound, final boolean drop) {
         this.destination = destination.createAccessor();
         this.drop = drop;
         this.deserializeLogic(compound);

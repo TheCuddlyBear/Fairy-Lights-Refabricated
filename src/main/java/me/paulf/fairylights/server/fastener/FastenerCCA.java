@@ -17,6 +17,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface FastenerCCA<F extends FastenerAccessor> extends Component {
+    boolean reconnect(Level world, Connection connection, FastenerCCA<?> newDestination);
+
+    Connection connect(Level world, FastenerCCA<?> destination, ConnectionType<?> type, CompoundTag compound, boolean drop);
+
+    Connection createOutgoingConnection(Level world, UUID uuid, FastenerCCA<?> destination, ConnectionType<?> type, CompoundTag compound, boolean drop);
+
+    void createIncomingConnection(Level world, UUID uuid, FastenerCCA<?> destination, ConnectionType<?> type);
+
     @Override
     void writeToNbt(CompoundTag tag);
     
@@ -58,6 +66,9 @@ public interface FastenerCCA<F extends FastenerAccessor> extends Component {
     boolean hasNoConnections();
 
     boolean hasConnectionWith(FastenerCCA<?> fastener);
+
+    @Nullable
+    Connection getConnectionTo(FastenerAccessor destination);
 
     boolean removeConnection(UUID uuid);
 

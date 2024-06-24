@@ -1,6 +1,7 @@
 package me.paulf.fairylights.server.connection;
 
 import me.paulf.fairylights.server.fastener.Fastener;
+import me.paulf.fairylights.server.fastener.FastenerCCA;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -18,7 +19,7 @@ public class ConnectionType<T extends Connection> {
         this.item = builder.item;
     }
 
-    public T create(final Level world, final Fastener<?> fastener, final UUID uuid) {
+    public T create(final Level world, final FastenerCCA<?> fastener, final UUID uuid) {
         return this.factory.create(this, world, fastener, uuid);
     }
 
@@ -50,6 +51,6 @@ public class ConnectionType<T extends Connection> {
     }
 
     public interface Factory<T extends Connection> {
-        T create(final ConnectionType<T> type, final Level world, final Fastener<?> fastener, final UUID uuid);
+        T create(final ConnectionType<T> type, final Level world, final FastenerCCA<?> fastener, final UUID uuid);
     }
 }

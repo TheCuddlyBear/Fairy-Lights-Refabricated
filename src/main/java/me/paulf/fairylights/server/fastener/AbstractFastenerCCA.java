@@ -3,15 +3,15 @@ package me.paulf.fairylights.server.fastener;
 import com.google.common.collect.ImmutableList;
 import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import me.paulf.fairylights.FairyLights;
-import me.paulf.fairylights.server.capability.CapabilityHandler;
 import me.paulf.fairylights.server.connection.Connection;
 import me.paulf.fairylights.server.connection.ConnectionType;
+import me.paulf.fairylights.server.fastener.FastenerType;
 import me.paulf.fairylights.server.fastener.accessor.FastenerAccessor;
+import me.paulf.fairylights.server.fastener.FastenerCCA;
 import me.paulf.fairylights.util.AABBBuilder;
 import me.paulf.fairylights.util.Curve;
 import me.paulf.fairylights.util.RegistryObjects;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -33,6 +33,7 @@ public abstract class AbstractFastenerCCA<F extends FastenerAccessor> implements
 
     private final Map<UUID, Incoming> incoming = new HashMap<>();
 
+    // TODO: ??
     protected AABB bounds = BlockEntity.INFINITE_EXTENT_AABB;
 
     @Nullable
@@ -171,8 +172,8 @@ public abstract class AbstractFastenerCCA<F extends FastenerAccessor> implements
     }
 
     @Override
-    public boolean hasConnectionWith(final Fastener<?> fastener) {
-        return this.getConnectionTo(fastener.createAccessor()) != null;
+    public boolean hasConnectionWith(final FastenerCCA<?> FastenerCCA) {
+        return this.getConnectionTo(FastenerCCA.createAccessor()) != null;
     }
 
     @Nullable
@@ -206,7 +207,7 @@ public abstract class AbstractFastenerCCA<F extends FastenerAccessor> implements
     }
 
     @Override
-    public boolean reconnect(final Level world, final Connection connection, final Fastener<?> newDestination) {
+    public boolean reconnect(final Level world, final Connection connection, final FastenerCCA<?> newDestination) {
         if (this.equals(newDestination) || newDestination.hasConnectionWith(this)) {
             return false;
         }
@@ -225,7 +226,7 @@ public abstract class AbstractFastenerCCA<F extends FastenerAccessor> implements
     }
 
     @Override
-    public Connection connect(final Level world, final Fastener<?> destination, final ConnectionType<?> type, final CompoundTag compound, final boolean drop) {
+    public Connection connect(final Level world, final FastenerCCA<?> destination, final ConnectionType<?> type, final CompoundTag compound, final boolean drop) {
         final UUID uuid = Mth.createInsecureUUID();
         final Connection connection = this.createOutgoingConnection(world, uuid, destination, type, compound, drop);
         destination.createIncomingConnection(world, uuid, this, type);
@@ -233,7 +234,7 @@ public abstract class AbstractFastenerCCA<F extends FastenerAccessor> implements
     }
 
     @Override
-    public Connection createOutgoingConnection(final Level world, final UUID uuid, final Fastener<?> destination, final ConnectionType<?> type, final CompoundTag compound, final boolean drop) {
+    public Connection createOutgoingConnection(final Level world, final UUID uuid, final FastenerCCA<?> destination, final ConnectionType<?> type, final CompoundTag compound, final boolean drop) {
         final Connection c = type.create(world, this, uuid);
         c.deserialize(destination, compound, drop);
         this.outgoing.put(uuid, c);
@@ -242,7 +243,7 @@ public abstract class AbstractFastenerCCA<F extends FastenerAccessor> implements
     }
 
     @Override
-    public void createIncomingConnection(final Level world, final UUID uuid, final Fastener<?> destination, final ConnectionType<?> type) {
+    public void createIncomingConnection(final Level world, final UUID uuid, final FastenerCCA<?> destination, final ConnectionType<?> type) {
         this.incoming.put(uuid, new Incoming(destination.createAccessor(), uuid));
         this.setDirty();
     }
@@ -264,7 +265,7 @@ public abstract class AbstractFastenerCCA<F extends FastenerAccessor> implements
         for(final Entry<UUID, Incoming> e : this.incoming.entrySet()){
             final CompoundTag tag = new CompoundTag();
             tag.putUUID("uuid", e.getKey());
-            tag.put("fastener", FastenerType.serialize(e.getValue().fastener));
+            tag.put("FastenerCCA", FastenerType.serialize(e.getValue().FastenerCCA));
             incoming.add(tag);
         }
         compound.put("incoming", incoming);
@@ -288,7 +289,7 @@ public abstract class AbstractFastenerCCA<F extends FastenerAccessor> implements
         for (final Entry<UUID, Incoming> e : this.incoming.entrySet()) {
             final CompoundTag tag = new CompoundTag();
             tag.putUUID("uuid", e.getKey());
-            tag.put("fastener", FastenerType.serialize(e.getValue().fastener));
+            tag.put("FastenerCCA", FastenerType.serialize(e.getValue().FastenerCCA));
             incoming.add(tag);
         }
         compound.put("incoming", incoming);
@@ -333,8 +334,8 @@ public abstract class AbstractFastenerCCA<F extends FastenerAccessor> implements
         for (int i = 0; i < incoming.size(); i++) {
             final CompoundTag incomingNbt = incoming.getCompound(i);
             final UUID uuid = incomingNbt.getUUID("uuid");
-            final FastenerAccessor fastener = FastenerType.deserialize(incomingNbt.getCompound("fastener"));
-            this.incoming.put(uuid, new AbstractFastenerCCA.Incoming(fastener, uuid));
+            final FastenerAccessor FastenerCCA = FastenerType.deserialize(incomingNbt.getCompound("FastenerCCA"));
+            this.incoming.put(uuid, new AbstractFastenerCCA.Incoming(FastenerCCA, uuid));
         }
         this.setDirty();
     }
@@ -377,35 +378,35 @@ public abstract class AbstractFastenerCCA<F extends FastenerAccessor> implements
         for (int i = 0; i < incoming.size(); i++) {
             final CompoundTag incomingNbt = incoming.getCompound(i);
             final UUID uuid = incomingNbt.getUUID("uuid");
-            final FastenerAccessor fastener = FastenerType.deserialize(incomingNbt.getCompound("fastener"));
-            this.incoming.put(uuid, new Incoming(fastener, uuid));
+            final FastenerAccessor FastenerCCA = FastenerType.deserialize(incomingNbt.getCompound("FastenerCCA"));
+            this.incoming.put(uuid, new Incoming(FastenerCCA, uuid));
         }
         this.setDirty();
     }*/
 
     private final LazyOptional<FastenerCCA<?>> lazyOptional = LazyOptional.of(() -> this);
 
-    @Override
+    /*@Override
     public <T> LazyOptional<T> getCapability(final Capability<T> capability, final Direction facing) {
         return capability == CapabilityHandler.FASTENER_CAP ? this.lazyOptional.cast() : LazyOptional.empty();
-    }
+    }*/
 
     static class Incoming {
-        final FastenerAccessor fastener;
+        final FastenerAccessor FastenerCCA;
 
         final UUID id;
 
-        Incoming(final FastenerAccessor fastener, final UUID id) {
-            this.fastener = fastener;
+        Incoming(final FastenerAccessor FastenerCCA, final UUID id) {
+            this.FastenerCCA = FastenerCCA;
             this.id = id;
         }
 
         boolean gone(final Level world) {
-            return this.fastener.isGone(world);
+            return this.FastenerCCA.isGone(world);
         }
 
         Optional<Connection> get(final Level world) {
-            return this.fastener.get(world, false).map(Optional::of).orElse(Optional.empty()).flatMap(f -> f.get(this.id));
+            return this.FastenerCCA.get(world, false).map(Optional::of).orElse(Optional.empty()).flatMap(f -> f.get(this.id));
         }
     }
 }
