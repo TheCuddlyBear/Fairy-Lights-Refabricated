@@ -1,5 +1,6 @@
 package me.paulf.fairylights.server.fastener.accessor;
 
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import me.paulf.fairylights.server.capability.CapabilityHandler;
 import me.paulf.fairylights.server.fastener.EntityFastener;
 import me.paulf.fairylights.server.fastener.Fastener;
@@ -12,9 +13,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.util.LazyOptional;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 
 public abstract class EntityFastenerAccessor<E extends Entity> implements FastenerAccessor {

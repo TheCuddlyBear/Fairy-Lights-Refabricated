@@ -1,5 +1,6 @@
 package me.paulf.fairylights.server.item;
 
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import me.paulf.fairylights.server.feature.light.LightBehavior;
 import me.paulf.fairylights.util.EmptyProvider;
 import me.paulf.fairylights.util.SimpleProvider;
@@ -9,7 +10,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
 
 public interface LightVariant<T extends LightBehavior> {
     final class Holder {

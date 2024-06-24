@@ -1,6 +1,7 @@
 package me.paulf.fairylights.server.fastener;
 
 import com.google.common.collect.ImmutableList;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import me.paulf.fairylights.FairyLights;
 import me.paulf.fairylights.server.capability.CapabilityHandler;
 import me.paulf.fairylights.server.connection.Connection;
@@ -24,9 +25,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -297,7 +297,7 @@ public abstract class AbstractFastener<F extends FastenerAccessor> implements Fa
                 final Connection connection = this.outgoing.get(uuid);
                 connection.deserialize(connectionCompound.getCompound("connection"));
             } else {
-                final ConnectionType<?> type = FairyLights.CONNECTION_TYPES.get().getValue(ResourceLocation.tryParse(connectionCompound.getString("type")));
+                final ConnectionType<?> type = FairyLights.CONNECTION_TYPES.get().get(ResourceLocation.tryParse(connectionCompound.getString("type")));
                 if (type != null) {
                     final Connection connection = type.create(this.world, this, uuid);
                     connection.deserialize(connectionCompound.getCompound("connection"));

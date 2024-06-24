@@ -1,5 +1,6 @@
 package me.paulf.fairylights.server.fastener.accessor;
 
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import me.paulf.fairylights.server.capability.CapabilityHandler;
 import me.paulf.fairylights.server.fastener.BlockFastener;
 import me.paulf.fairylights.server.fastener.Fastener;
@@ -9,9 +10,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.util.LazyOptional;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public final class BlockFastenerAccessor implements FastenerAccessor {
     private BlockPos pos = BlockPos.ZERO;

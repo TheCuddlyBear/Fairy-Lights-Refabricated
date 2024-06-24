@@ -17,8 +17,8 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,7 +50,7 @@ public final class HangingLightsConnectionItem extends ConnectionItem {
     }
 
     public static StringType getString(final CompoundTag tag) {
-        return Objects.requireNonNull(FairyLights.STRING_TYPES.get().getValue(ResourceLocation.tryParse(tag.getString("string"))));
+        return Objects.requireNonNull(FairyLights.STRING_TYPES.get().get(ResourceLocation.tryParse(tag.getString("string"))));
     }
 
     public static void setString(final CompoundTag tag, final StringType string) {

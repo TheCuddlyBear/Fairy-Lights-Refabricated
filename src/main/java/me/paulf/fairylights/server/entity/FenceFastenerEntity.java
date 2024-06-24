@@ -1,5 +1,7 @@
 package me.paulf.fairylights.server.entity;
 
+import io.github.fabricators_of_create.porting_lib.entity.IEntityAdditionalSpawnData;
+import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
 import me.paulf.fairylights.server.ServerProxy;
@@ -33,11 +35,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.entity.IEntityAdditionalSpawnData;
-import net.minecraftforge.network.NetworkHooks;
+//import net.minecraftforge.common.util.LazyOptional;
+//import net.minecraftforge.entity.IEntityAdditionalSpawnData;
+//import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 
 public final class FenceFastenerEntity extends HangingEntity implements IEntityAdditionalSpawnData {
