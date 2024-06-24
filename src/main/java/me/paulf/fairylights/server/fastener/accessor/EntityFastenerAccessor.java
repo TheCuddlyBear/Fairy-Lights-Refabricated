@@ -4,6 +4,7 @@ import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import me.paulf.fairylights.server.capability.CapabilityHandler;
 import me.paulf.fairylights.server.fastener.EntityFastener;
 import me.paulf.fairylights.server.fastener.Fastener;
+import me.paulf.fairylights.server.fastener.FastenerCCA;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.DoubleTag;
 import net.minecraft.nbt.ListTag;
@@ -44,7 +45,7 @@ public abstract class EntityFastenerAccessor<E extends Entity> implements Fasten
     }
 
     @Override
-    public LazyOptional<Fastener<?>> get(final Level world, final boolean load) {
+    public LazyOptional<FastenerCCA<?>> get(final Level world, final boolean load) {
         if (this.entity == null) {
             if (world instanceof ServerLevel) {
                 final Entity e = ((ServerLevel) world).getEntity(this.uuid);
